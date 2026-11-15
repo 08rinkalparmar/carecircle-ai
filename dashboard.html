@@ -1,0 +1,240 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CareCircle AI - Dashboard</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body class="dashboard-page">
+
+<header class="topbar">
+    <div>
+        <div class="logo small">💚 CareCircle <span>AI</span></div>
+        <h1>Welcome, {{ user_name }}!</h1>
+        <p id="dateTime" class="muted"></p>
+    </div>
+
+    <div class="topbar-right">
+        <select id="languageSelect" aria-label="Language">
+            <option value="en">English</option>
+            <option value="gu">ગુજરાતી</option>
+            <option value="hi">हिन्दी</option>
+        </select>
+
+        <span class="profile">👤</span>
+        <a href="{{ url_for('logout') }}" class="btn-small">Logout</a>
+    </div>
+</header>
+
+<nav class="nav">
+    <a href="#health">Health Monitoring</a>
+    <a href="#family">My Contacts</a>
+    <a href="#assistant">AI Care Assistant</a>
+</nav>
+
+<main class="container">
+
+    <!-- Patient Information -->
+    <section id="patient">
+        <h2>👤 Patient Information</h2>
+
+        <div class="card">
+            <h3>{{ user['patient_name'] }}</h3>
+            <p><strong>Email:</strong> {{ user['email'] }}</p>
+        </div>
+    </section>
+
+    <!-- Health Monitoring -->
+    
+<!-- Health Monitoring -->
+<section id="health">
+    <h2>❤️ Health Monitoring</h2>
+
+    <p class="muted">
+        Enter your health readings for general tracking.
+        These readings do not provide a medical diagnosis.
+    </p>
+
+    <div class="card">
+        <h3>Enter Health Readings</h3>
+
+        <form id="healthForm">
+
+            <label for="heartRate">Heart Rate (BPM)</label>
+            <input
+                type="number"
+                id="heartRate"
+                min="1"
+                required
+                placeholder="Enter heart rate"
+            >
+
+            <label for="systolic">Blood Pressure - Systolic</label>
+            <input
+                type="number"
+                id="systolic"
+                min="1"
+                required
+                placeholder="Enter systolic value"
+            >
+
+            <label for="diastolic">Blood Pressure - Diastolic</label>
+            <input
+                type="number"
+                id="diastolic"
+                min="1"
+                required
+                placeholder="Enter diastolic value"
+            >
+
+            <label for="steps">Daily Steps</label>
+            <input
+                type="number"
+                id="steps"
+                min="0"
+                required
+                placeholder="Enter daily steps"
+            >
+
+            <button type="submit" class="btn-primary">
+                Save Readings
+            </button>
+
+            <p id="healthMessage" role="status"></p>
+
+<div class="saved-readings">
+    <h3>Latest Saved Readings</h3>
+
+    {% if latest_reading %}
+        <p>
+            <strong>Heart Rate:</strong>
+            {{ latest_reading['heart_rate'] }} BPM
+        </p>
+
+        <p>
+            <strong>Blood Pressure:</strong>
+            {{ latest_reading['systolic'] }}/{{ latest_reading['diastolic'] }}
+        </p>
+
+        <p>
+            <strong>Daily Steps:</strong>
+            {{ latest_reading['steps'] }}
+        </p>
+
+        <p class="muted">
+            Recorded at: {{ latest_reading['recorded_at'] }}
+        </p>
+    {% else %}
+        <p class="muted">No health readings saved yet.</p>
+    {% endif %}
+</div>
+
+
+        </form>
+    </div>
+</section>
+
+    <!-- Family and Contacts -->
+    <section id="family">
+        <h2>👨‍👩‍👧 My Contacts</h2>
+
+        <div class="grid two">
+
+            <div class="card">
+                <h3>Relative</h3>
+
+                {% if user['relative_name'] %}
+                    <p><strong>Name:</strong> {{ user['relative_name'] }}</p>
+                    <p><strong>Email:</strong> {{ user['relative_email'] or 'Not provided' }}</p>
+                    <p><strong>Phone:</strong> {{ user['relative_phone'] or 'Not provided' }}</p>
+                {% else %}
+                    <p class="muted">No relative details added.</p>
+                {% endif %}
+            </div>
+
+            <div class="card">
+                <h3>Caretaker</h3>
+
+                {% if user['caretaker_name'] %}
+                    <p><strong>Name:</strong> {{ user['caretaker_name'] }}</p>
+                    <p><strong>Email:</strong> {{ user['caretaker_email'] or 'Not provided' }}</p>
+                    <p><strong>Phone:</strong> {{ user['caretaker_phone'] or 'Not provided' }}</p>
+                {% else %}
+                    <p class="muted">No caretaker details added.</p>
+                {% endif %}
+            </div>
+
+            <div class="card">
+                <h3>Doctor</h3>
+
+                {% if user['doctor_name'] %}
+                    <p><strong>Name:</strong> {{ user['doctor_name'] }}</p>
+                    <p><strong>Email:</strong> {{ user['doctor_email'] or 'Not provided' }}</p>
+                    <p><strong>Phone:</strong> {{ user['doctor_phone'] or 'Not provided' }}</p>
+                {% else %}
+                    <p class="muted">No doctor details added.</p>
+                {% endif %}
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Notifications -->
+    <section id="notifications">
+        <h2>🔔 Notifications</h2>
+
+        <div class="card">
+            <p class="muted">
+                Health alerts and notification functionality
+                will be added in the next development step.
+            </p>
+        </div>
+    </section>
+
+    <!-- AI Assistant -->
+    <section id="assistant">
+        <h2>🤖 AI Care Assistant</h2>
+
+        <div class="card">
+            <p class="disclaimer">
+                This assistant provides general information only.
+                It cannot diagnose health conditions or replace a doctor.
+            </p>
+
+            <div id="chatBox" class="chat-box" aria-live="polite">
+                <div class="msg bot">
+                    Hello! How can I help you today?
+                </div>
+            </div>
+
+            <form id="chatForm" class="chat-form">
+                <input type="text" id="chatInput"
+                       placeholder="Type your question..."
+                       aria-label="Your question">
+
+                <button type="submit" class="btn-primary">
+                    Send
+                </button>
+            </form>
+
+            <p class="note">
+                AI integration will be configured separately.
+            </p>
+        </div>
+    </section>
+
+</main>
+
+<footer class="footer">
+    CareCircle AI - Healthcare Support Demo
+</footer>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>

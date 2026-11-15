@@ -1,0 +1,107 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CareCircle AI - Login</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body class="login-page">
+
+<main class="login-card">
+
+    <div class="logo">💚 CareCircle <span>AI</span></div>
+
+    <p class="tagline" data-i18n="tagline">
+        Caring Together, Living Better.
+    </p>
+
+    <label class="lang-box">🌐
+        <select id="languageSelect" aria-label="Language">
+            <option value="en">English</option>
+            <option value="gu">ગુજરાતી (Gujarati)</option>
+            <option value="hi">हिन्दी (Hindi)</option>
+        </select>
+    </label>
+
+    {% if error %}
+        <p class="error" role="alert">{{ error }}</p>
+    {% endif %}
+
+    <form id="loginForm" method="POST" action="{{ url_for('login') }}">
+
+        <label for="userId" data-i18n="userLabel">
+            Email Address
+        </label>
+
+        <input
+            type="email"
+            id="userId"
+            name="email"
+            placeholder="name@example.com"
+            autocomplete="username"
+            required
+        >
+
+        <label for="password" data-i18n="passwordLabel">
+            Password
+        </label>
+
+        <div class="password-row">
+
+            <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Enter your password"
+                autocomplete="current-password"
+                required
+            >
+
+            <button
+                type="button"
+                id="togglePassword"
+                class="btn-small">
+                Show
+            </button>
+
+        </div>
+
+        <p id="formError" class="error" role="alert"></p>
+
+        <div class="row-between">
+
+            <label class="check">
+                <input type="checkbox" id="remember">
+                <span data-i18n="remember">Remember me</span>
+            </label>
+
+            <a href="#" id="forgotLink" data-i18n="forgot">
+                Forgot password?
+            </a>
+
+        </div>
+
+        <button type="submit" class="btn-primary" data-i18n="loginBtn">
+            Login
+        </button>
+
+    </form>
+
+    <p class="center">
+        <span data-i18n="noAccount">New here?</span>
+        <a href="{{ url_for('register') }}" data-i18n="register">
+            Register
+        </a>
+    </p>
+
+</main>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>

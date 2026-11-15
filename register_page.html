@@ -1,0 +1,107 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CareCircle AI - Registration</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body class="login-page">
+
+<main class="login-card">
+
+    <div class="logo">💚 CareCircle <span>AI</span></div>
+    <p class="tagline">Create Your Account</p>
+
+    {% if error %}
+        <p class="error">{{ error }}</p>
+    {% endif %}
+
+    <form method="POST" action="{{ url_for('register') }}">
+
+        <h3>Patient Information</h3>
+
+        <label>Patient Name *</label>
+        <input type="text" name="patient_name"
+               placeholder="Enter patient name" required>
+
+        <label>Email Address *</label>
+        <input type="email" name="email"
+               placeholder="Enter email address" required>
+
+        <label>Password *</label>
+        <input type="password" name="password"
+               placeholder="Minimum 8 characters"
+               minlength="8" required>
+
+        <hr>
+
+        <h3>Relative Information</h3>
+
+        <label>Relative Name</label>
+        <input type="text" name="relative_name"
+               placeholder="Enter relative name">
+
+        <label>Relative Email</label>
+        <input type="email" name="relative_email"
+               placeholder="Enter relative email">
+
+        <label>Relative Phone</label>
+        <input type="tel" name="relative_phone"
+               placeholder="Enter phone number">
+
+        <hr>
+
+        <h3>Caretaker Information</h3>
+
+        <label>Caretaker Name</label>
+        <input type="text" name="caretaker_name"
+               placeholder="Enter caretaker name">
+
+        <label>Caretaker Email</label>
+        <input type="email" name="caretaker_email"
+               placeholder="Enter caretaker email">
+
+        <label>Caretaker Phone</label>
+        <input type="tel" name="caretaker_phone"
+               placeholder="Enter phone number">
+
+        <hr>
+
+        <h3>Doctor Information</h3>
+
+        <label>Doctor Name</label>
+        <input type="text" name="doctor_name"
+               placeholder="Enter doctor name">
+
+        <label>Doctor Email</label>
+        <input type="email" name="doctor_email"
+               placeholder="Enter doctor email">
+
+        <label>Doctor Phone</label>
+        <input type="tel" name="doctor_phone"
+               placeholder="Enter phone number">
+
+        <p class="note">
+            Please enter contact details only with the person's permission.
+        </p>
+
+        <button type="submit" class="btn-primary">
+            Create Account
+        </button>
+
+    </form>
+
+    <p class="center">
+        Already have an account?
+        <a href="{{ url_for('login') }}">Login</a>
+    </p>
+
+</main>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

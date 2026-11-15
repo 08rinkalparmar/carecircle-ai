@@ -1,0 +1,191 @@
+/* style.css - shared by login page and dashboard */
+
+:root {
+  --teal: #0f766e;
+  --teal-dark: #0b5a54;
+  --green-soft: #e3f4ea;
+  --green: #2f9e6b;
+  --white: #ffffff;
+  --text: #1d2b2a;
+  --muted: #566866;
+  --warn: #fff4d6;
+  --danger: #b3261e;
+  --radius: 18px;
+  --shadow: 0 4px 14px rgba(15, 118, 110, 0.12);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "Atkinson Hyperlegible", Arial, sans-serif;
+  font-size: 1.15rem;
+  line-height: 1.5;
+  color: var(--text);
+  background: var(--green-soft);
+}
+
+h1 { font-size: 1.9rem; margin: 6px 0; }
+h2 { font-size: 1.5rem; color: var(--teal-dark); margin: 0 0 12px; }
+h3 { font-size: 1.2rem; margin: 0 0 8px; }
+a { color: var(--teal); font-weight: 700; }
+.muted { color: var(--muted); margin: 4px 0 12px; }
+.center { text-align: center; }
+.note { font-size: 0.95rem; color: var(--muted); text-align: center; }
+
+:focus-visible { outline: 3px solid var(--teal); outline-offset: 2px; }
+
+/* ---------- Logo ---------- */
+.logo { font-size: 2rem; font-weight: 700; color: var(--teal); text-align: center; }
+.logo span { background: var(--teal); color: var(--white); padding: 0 8px; border-radius: 8px; }
+.logo.small { font-size: 1.3rem; text-align: left; }
+
+/* ---------- Buttons and inputs ---------- */
+.btn-primary, .btn-small {
+  font-family: inherit;
+  border: none;
+  cursor: pointer;
+  border-radius: 12px;
+  font-weight: 700;
+}
+.btn-primary { background: var(--teal); color: var(--white); font-size: 1.2rem; padding: 14px 22px; min-height: 52px; width: 100%; }
+.btn-primary:hover { background: var(--teal-dark); }
+.btn-small { background: var(--white); color: var(--teal); border: 2px solid var(--teal); padding: 8px 14px; font-size: 1rem; text-decoration: none; min-height: 44px; }
+
+input[type="text"], input[type="password"], select {
+  width: 100%;
+  font-family: inherit;
+  font-size: 1.1rem;
+  padding: 12px 14px;
+  border: 2px solid #b9d8d3;
+  border-radius: 12px;
+  background: var(--white);
+}
+label { display: block; font-weight: 700; margin: 14px 0 6px; }
+
+/* ---------- Login page ---------- */
+.login-page { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 16px; background: linear-gradient(160deg, var(--green-soft), var(--white)); }
+.login-card { background: var(--white); width: 100%; max-width: 460px; padding: 30px 26px; border-radius: 24px; box-shadow: var(--shadow); }
+.tagline { text-align: center; color: var(--muted); margin: 4px 0 12px; }
+.lang-box { display: flex; align-items: center; gap: 8px; font-weight: 400; margin: 0 0 4px; }
+.password-row { display: flex; gap: 8px; }
+.password-row .btn-small { min-width: 80px; }
+.row-between { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; margin: 14px 0 18px; }
+.check { display: flex; align-items: center; gap: 8px; margin: 0; font-weight: 400; }
+.check input { width: 22px; height: 22px; }
+.error { color: var(--danger); font-weight: 700; min-height: 1.4em; margin: 8px 0 0; }
+
+/* ---------- Dashboard layout ---------- */
+.topbar { background: var(--white); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; padding: 16px 24px; box-shadow: var(--shadow); }
+.topbar-right { display: flex; align-items: center; gap: 10px; }
+.topbar-right select { width: auto; }
+.profile { font-size: 1.8rem; background: var(--green-soft); border-radius: 50%; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; }
+
+.nav { display: flex; gap: 8px; overflow-x: auto; padding: 12px 24px; background: var(--teal); }
+.nav a { color: var(--white); text-decoration: none; white-space: nowrap; padding: 8px 14px; border-radius: 10px; }
+.nav a:hover { background: var(--teal-dark); }
+
+.container { max-width: 1100px; margin: 0 auto; padding: 20px 16px; }
+section { margin-bottom: 34px; scroll-margin-top: 12px; }
+
+.card { background: var(--white); border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow); }
+.grid { display: grid; gap: 16px; }
+.grid.three { grid-template-columns: repeat(3, 1fr); }
+.grid.two { grid-template-columns: repeat(2, 1fr); }
+
+/* ---------- Routine and medicine rows ---------- */
+.item { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid #e3eeec; }
+.item:last-child { border-bottom: none; }
+.status { font-weight: 700; padding: 4px 12px; border-radius: 20px; background: var(--warn); font-size: 1rem; }
+.status.done { background: var(--green-soft); color: var(--green); }
+.done-text { color: var(--muted); text-decoration: line-through; }
+
+.reminder { background: var(--warn); border-left: 8px solid #e0a800; border-radius: var(--radius); padding: 14px 18px; margin-bottom: 16px; font-weight: 700; }
+.reminder.ok { background: var(--green-soft); border-color: var(--green); }
+
+/* ---------- Health ---------- */
+.badge { display: inline-block; background: var(--teal); color: var(--white); font-weight: 700; padding: 4px 14px; border-radius: 20px; }
+.stat { text-align: center; }
+.stat .icon { font-size: 2rem; }
+.big { font-size: 1.8rem; font-weight: 700; color: var(--teal-dark); margin: 0; }
+
+/* ---------- Family ---------- */
+.person { width: 100%; text-align: left; font-family: inherit; font-size: 1.1rem; background: var(--green-soft); border: 2px solid transparent; border-radius: 12px; padding: 12px; margin-bottom: 8px; cursor: pointer; min-height: 52px; }
+.person:hover, .person.active { border-color: var(--teal); }
+
+/* ---------- Notifications ---------- */
+.notif-list { list-style: none; margin: 0; }
+.notif-list li { padding: 10px 0; border-bottom: 1px solid #e3eeec; }
+.notif-list li:last-child { border-bottom: none; }
+
+/* ---------- Chat ---------- */
+.disclaimer { background: var(--warn); padding: 10px 14px; border-radius: 12px; font-size: 1rem; margin-top: 0; }
+.chat-box { height: 240px; overflow-y: auto; background: var(--green-soft); border-radius: 12px; padding: 12px; margin-bottom: 12px; }
+.msg { max-width: 85%; padding: 10px 14px; border-radius: 14px; margin-bottom: 8px; }
+.msg.bot { background: var(--white); }
+.msg.user { background: var(--teal); color: var(--white); margin-left: auto; }
+.chat-form { display: flex; gap: 8px; }
+.chat-form .btn-primary { width: auto; }
+
+.footer { text-align: center; color: var(--muted); padding: 20px; font-size: 0.95rem; }
+
+/* ---------- Responsive: tablet and mobile ---------- */
+@media (max-width: 900px) {
+  .grid.three { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 640px) {
+  body { font-size: 1.05rem; }
+  .grid.three, .grid.two { grid-template-columns: 1fr; }
+  .topbar { padding: 14px 16px; }
+  h1 { font-size: 1.5rem; }
+}
+
+/* Health Monitoring Form */
+
+#healthForm {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#healthForm input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #cbd5d1;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+#healthForm input:focus {
+    outline: 2px solid #0f766e;
+    border-color: #0f766e;
+}
+
+#healthForm button {
+    margin-top: 12px;
+    cursor: pointer;
+}
+
+#healthMessage {
+    color: #0f766e;
+    font-weight: 600;
+}
+
+/* Saved Health Readings */
+
+.saved-readings {
+    margin-top: 20px;
+    padding: 16px;
+    background: #e3f4ea;
+    border-radius: 10px;
+}
+
+.saved-readings h3 {
+    color: #0b5a54;
+    margin-bottom: 12px;
+}
+
+.saved-readings p {
+    margin: 8px 0;
+    color: #1d2b2a;
+}
